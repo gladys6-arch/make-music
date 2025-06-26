@@ -36,10 +36,11 @@ searchBtn.addEventListener('click',()=>{
              Playlist.appendChild(PlaylistItem);
 
           });
+          results.appendChild(li);
 
-          })
-    })
-   })
+          });
+    });
+   });
 
 ;
 
