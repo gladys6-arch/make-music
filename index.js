@@ -5,9 +5,12 @@ const resultsList = document.getElementById('results');
 const title=document.getElementById('current-song-title');
 const audio =document.getElementById('audio');
 const playbutton=document.getElementById('play-btn');
+const nextBtn=document.getElementById('next-btn');
+const prevBtn =document.getElementById('prev-btn');
 
-
+// holds the current search results
 let songs = [];
+// index of the current playing song
 let currentIndex =0;
 
 searchBtn.addEventListener('click',()=>{
@@ -69,6 +72,8 @@ playBtn.addEventListener('click', function () {
       playBtn.textContent = "▶️";
     }
   });
+
+  ne
 
 
 
