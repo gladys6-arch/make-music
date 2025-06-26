@@ -4,7 +4,7 @@ const searchBtn=document.getElementById('search-btn');
 const resultsList = document.getElementById('results');
 const title=document.getElementById('current-song-title');
 const audio =document.getElementById('audio');
-const playbutton=document.getElementById('play-btn');
+const playBtn=document.getElementById('play-btn');
 const nextBtn=document.getElementById('next-btn');
 const prevBtn =document.getElementById('prev-btn');
 
@@ -14,7 +14,7 @@ let songs = [];
 let currentIndex =0;
 
 searchBtn.addEventListener('click',()=>{
-  const query = searchInput.value;
+  const searchTerm = searchInput.value;
    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=song&limit=5`;
 
    fetch(`https://cors-anywhere.herokuapp.com/${url}`)
@@ -22,9 +22,10 @@ searchBtn.addEventListener('click',()=>{
     return response.json();
    })
    .then(function(data){
-    results.innerHTML = "";
+    songs = data.results;
+    resultsList.innerHTML="";
 
-    data.resultsforEach(function(song){
+    data.results.forEach(function(song, index){
       const li= document.createElement('li');
       li.innerHTML= `
             ${song.trackName} - ${song.artistName}
@@ -34,16 +35,24 @@ searchBtn.addEventListener('click',()=>{
           `;
 
           // the play button
-          li.querySelector('.add').addEventListener('click',function(){
-            const PlaylistItem =document.createElement('li');
-             PlaylistItem.textContent = song.trackName + " - " + song.artistName;
-             Playlist.appendChild(PlaylistItem);
+          li.querySelector('.play').addEventListener('click',function(){
+            playSong(index);
 
           });
+
+           li.querySelector('.add').addEventListener('click',function(){
+            const playlistItem= document.createElement('li');
+            playlistItem.textContent =`${song.trackName} - ${song.artistName}`;
+            playlist.appendChild(playlistItem)
+           });
+
           results.appendChild(li);
 
           });
-    });
+    })
+        .catch(function (error){
+         console.error("Error fetching songs", error);
+      });
    });
 
    function playSong(index) {
