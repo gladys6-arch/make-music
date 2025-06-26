@@ -1,98 +1,47 @@
-// get element by id
-const searchInput=document.getElementById('search-input');
-const searchBtn=document.getElementById('search-btn');
-const resultsList = document.getElementById('results');
-const title=document.getElementById('current-song-title');
-const audio =document.getElementById('audio');
-const playBtn=document.getElementById('play-btn');
-const nextBtn=document.getElementById('next-btn');
-const prevBtn =document.getElementById('prev-btn');
+function searchSongs() {
+  const query = document.getElementById("search").value.trim();
+  if (!query) return;
 
-// holds the current search results
-let songs = [];
-// index of the current playing song
-let currentIndex =0;
+  const proxy = "http://localhost:8080/";
+  const url = `${proxy}https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=5`;
 
-searchBtn.addEventListener('click',()=>{
-  const searchTerm = searchInput.value;
-   const url = `https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=song&limit=5`;
-
-   fetch(`https://cors-anywhere.herokuapp.com/${url}`)
-   .then(function(response){
-    return response.json();
-   })
-   .then(function(data){
-    songs = data.results;
-    resultsList.innerHTML="";
-
-    data.results.forEach(function(song, index){
-      const li= document.createElement('li');
-      li.innerHTML= `
-            ${song.trackName} - ${song.artistName}
-            <br>
-            <button class="play">Play</button>
-            <button class="add">Add to Playlist</button>
-          `;
-
-          // the play button
-          li.querySelector('.play').addEventListener('click',function(){
-            playSong(index);
-
-          });
-
-           li.querySelector('.add').addEventListener('click',function(){
-            const playlistItem= document.createElement('li');
-            playlistItem.textContent =`${song.trackName} - ${song.artistName}`;
-            playlist.appendChild(playlistItem)
-           });
-
-          results.appendChild(li);
-
-          });
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      displayResults(data.results);
     })
-        .catch(function (error){
-         console.error("Error fetching songs", error);
-      });
-   });
+    .catch((err) => {
+      console.error("Error fetching songs", err);
+    });
+}
 
-   function playSong(index) {
-    const song = songs[index];
-    if (!song) return;
+function displayResults(songs) {
+  const container = document.getElementById("results");
+  container.innerHTML = "";
 
-    audio.src = song.previewUrl;
-    audio.play();
-    currentIndex = index;
-    title.textContent = song.trackName + " - " + song.artistName;
-    playBtn.textContent = "⏸️";
-
-    audio.onended = function () {
-      playBtn.textContent = "▶️";
-    };
+  if (!songs.length) {
+    container.innerHTML = "<p>No results found.</p>";
+    return;
   }
 
-playBtn.addEventListener('click', function () {
-    if (!audio.src) return;
-
-    if (audio.paused) {
-      audio.play();
-      playBtn.textContent = "⏸️";
-    } else {
-      audio.pause();
-      playBtn.textContent = "▶️";
-    }
+  songs.forEach(song => {
+    const div = document.createElement("div");
+    div.className = "song";
+    div.innerHTML = `
+      <img src="${song.artworkUrl100}" alt="Cover" />
+      <h3>${song.trackName}</h3>
+      <p>${song.artistName}</p>
+      <audio controls src="${song.previewUrl}"></audio>
+    `;
+    container.appendChild(div);
   });
+}
 
-  nextBtn.addEventListener('click', function(){
-    if(songs.length === 0) return;
-    currentIndex= (currentIndex + 1) % songs.length;
-    playSong(currentIndex);
-  });
 
-  prevBtn.addEventListener('click', function(){
-    if(songs.length === 0) return;
-    currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-    playSong(currentIndex);
-  })
+
+        
+
+   
 
 
 
