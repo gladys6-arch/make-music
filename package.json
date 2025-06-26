@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/gladys6-arch/make-music#readme",
   "dependencies": {
-    "cors-anywhere": "^0.4.4" 
+    "cors-anywhere": "^0.4.4"
   }
 }
