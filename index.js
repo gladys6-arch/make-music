@@ -32,14 +32,16 @@ searchBtn.addEventListener('click',()=>{
           // the play button
           li.querySelector('.add').addEventListener('click',function(){
             const PlaylistItem =document.createElement('li');
-            
-          })
+             PlaylistItem.textContent = song.trackName + " - " + song.artistName;
+             Playlist.appendChild(PlaylistItem);
+
+          });
 
           })
     })
    })
 
-});
+;
 
 function searchMusic(query) {
     const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=10`;
@@ -68,12 +70,6 @@ function searchMusic(query) {
     });
   
   }
- function prevSong(){
-
- }
-
- function  nextSong(){
-  if(songs.length === 0)return;
- }
+ 
 
 
