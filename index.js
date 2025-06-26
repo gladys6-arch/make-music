@@ -7,7 +7,8 @@ const audio =document.getElementById('audio');
 const playbutton=document.getElementById('play-btn');
 
 
-let currentsong =null;
+let songs = [];
+let currentIndex =0;
 
 searchBtn.addEventListener('click',()=>{
   const query = searchInput.value;
@@ -41,6 +42,21 @@ searchBtn.addEventListener('click',()=>{
           });
     });
    });
+
+   function playSong(index) {
+    const song = songs[index];
+    if (!song) return;
+
+    audio.src = song.previewUrl;
+    audio.play();
+    currentIndex = index;
+    title.textContent = song.trackName + " - " + song.artistName;
+    playBtn.textContent = "⏸️";
+
+    audio.onended = function () {
+      playBtn.textContent = "▶️";
+    };
+  }
 
 playBtn.addEventListener('click', function () {
     if (!audio.src) return;
