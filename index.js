@@ -3,7 +3,7 @@ const searchInput=document.getElementById('search-input');
 const searchBtn=document.getElementById('search-btn');
 const resultsList = document.getElementById('results');
 const title=document.getElementById('current-song-title');
-const Audio =document.getElementById('audio');
+const audio =document.getElementById('audio');
 const playbutton=document.getElementById('play-btn');
 
 
@@ -42,35 +42,19 @@ searchBtn.addEventListener('click',()=>{
     });
    });
 
-;
+playBtn.addEventListener('click', function () {
+    if (!audio.src) return;
 
-function searchMusic(query) {
-    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=10`;
+    if (audio.paused) {
+      audio.play();
+      playBtn.textContent = "⏸️";
+    } else {
+      audio.pause();
+      playBtn.textContent = "▶️";
+    }
+  });
 
-    fetch(`https://cors-anywhere.herokuapp.com/${url}`)
-      .then(res => res.json())
-      .then(data => {
-        songs = data.results;
-        displayResults(songs);
-      })
-      .catch(console.error);
-  }
 
-  function displayResults(results){
-    resultsList.innerHTML="";
 
-    results.forEach((songs,index)=>{
-      const li =document.createElement('li');
-      li.innerHTML= `
-        <strong>${songs.trackName}</strong> by ${song.artistName}
-        <br>
-        <button onclick="playSong(${index})">Play</button>
-        <button onclick="addToPlaylist(${index})">➕</button>
-      `;
-      resultsList.appendChild('li');
-    });
-  
-  }
+
  
-
-
