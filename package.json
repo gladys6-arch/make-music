@@ -1,0 +1,25 @@
+{
+  "name": "music--app",
+  "version": "1.0.0",
+  "description": "This is a simple web application that allows users to search for any song or artist and listen to 30-second audio previews directly in the browser. The app fetches music data from the iTunes Search API and displays key information such as the song title, artist name, album artwork, and an audio player.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gladys6-arch/make-music.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gladys6-arch/make-music/issues"
+  },
+  "homepage": "https://github.com/gladys6-arch/make-music#readme",
+  "dependencies": {
+    "cors-anywhere": "^0.4.4" 
+  }
+}
