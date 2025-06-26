@@ -73,7 +73,17 @@ playBtn.addEventListener('click', function () {
     }
   });
 
-  ne
+  nextBtn.addEventListener('click', function(){
+    if(songs.length === 0) return;
+    currentIndex= (currentIndex + 1) % songs.length;
+    playSong(currentIndex);
+  });
+
+  prevBtn.addEventListener('click', function(){
+    if(songs.length === 0) return;
+    currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+    playSong(currentIndex);
+  })
 
 
 
