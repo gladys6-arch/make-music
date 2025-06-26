@@ -22,7 +22,20 @@ searchBtn.addEventListener('click',()=>{
 
     data.resultsforEach(function(song){
       const li= document.createElement('li');
-      li.innerHTML=
+      li.innerHTML= `
+            ${song.trackName} - ${song.artistName}
+            <br>
+            <button class="play">Play</button>
+            <button class="add">Add to Playlist</button>
+          `;
+
+          // the play button
+          li.querySelector('.add').addEventListener('click',function(){
+            const PlaylistItem =document.createElement('li');
+            
+          })
+
+          })
     })
    })
 
