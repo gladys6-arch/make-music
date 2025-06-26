@@ -2,8 +2,8 @@ function searchSongs() {
   const query = document.getElementById("search").value.trim();
   if (!query) return;
 
-  const proxy = "http://localhost:8080/";
-  const url = `${proxy}https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=5`;
+   const apiUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=5`;
+  const url = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
 
   fetch(url)
     .then((res) => res.json())
