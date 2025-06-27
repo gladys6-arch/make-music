@@ -73,14 +73,11 @@ If you want to run the project locally, you'll need:
    node server.js
    ```
 
-5. Open your browser and visit `http://localhost:8080`
+## live App
 
 
-6. Run the Frontend
-  
-  using
-
-  live-server
+-  Frontend: [https://gladys6-arch.github.io/music-app](https://gladys6-arch.github.io/music-app)
+- Proxy Server: [https://your-proxy-name.onrender.com](https://your-proxy-name.onrender.com)
 
 ## Technologies Used
 
@@ -91,12 +88,7 @@ If you want to run the project locally, you'll need:
 - Local CORS proxy (cors-anywhere)
 -Live server
 
-## Related Repositories
 
-### Backend API
-
-- Repository: [Blog API Repository](https://github.com/dennis-kiboi/blog-app-sdf-ft11-json-server)
-- Deployed API: [Live API URL](https://blog-app-sdf-ft11-json-server.onrender.com)
 
 ## Support and Contact Details
 
